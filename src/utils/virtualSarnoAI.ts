@@ -318,9 +318,10 @@ You can explore TMS after ensuring there's no structural emergency. Your safety 
       recommendations.push('Focus on psychological approaches instead');
     }
 
-    // Add a signature Sarno expression
-    const randomExpression = SARNO_EXPRESSIONS[Math.floor(Math.random() * SARNO_EXPRESSIONS.length)];
-    response += '\n\n' + randomExpression;
+    // Add a signature Sarno expression (use deterministic selection to avoid hydration issues)
+    const expressionIndex = Math.abs(userMessage.length + analysis.category.length) % SARNO_EXPRESSIONS.length;
+    const selectedExpression = SARNO_EXPRESSIONS[expressionIndex];
+    response += '\n\n' + selectedExpression;
 
     // Suggest follow-up questions
     const followUpQuestions = this.generateFollowUpQuestions(analysis, context);
@@ -391,7 +392,8 @@ You can explore TMS after ensuring there's no structural emergency. Your safety 
   }
 
   private generateId(): string {
-    return Math.random().toString(36).substr(2, 9);
+    // Use timestamp + counter for deterministic ID generation to avoid hydration issues
+    return `msg_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
   }
 
   // Public method to get conversation history

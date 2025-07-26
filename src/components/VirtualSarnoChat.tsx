@@ -24,8 +24,17 @@ export default function VirtualSarnoChat({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const sarnoAI = useRef(new VirtualSarnoAI());
 
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
-    // Add initial message from Dr. Sarno
+    // Ensure we're on the client side to prevent hydration issues
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    // Only add initial message after client-side hydration
+    if (!isClient) return;
+    
     const initialSarnoMessage: VirtualSarnoMessage = {
       id: uuidv4(),
       role: 'sarno',
@@ -37,7 +46,7 @@ export default function VirtualSarnoChat({
       }
     };
     setMessages([initialSarnoMessage]);
-  }, [initialMessage, state.currentPhase]);
+  }, [initialMessage, state.currentPhase, isClient]);
 
   useEffect(() => {
     scrollToBottom();
@@ -230,6 +239,28 @@ export default function VirtualSarnoChat({
       hour12: true
     }).format(timestamp);
   };
+
+  // Show loading state during hydration to prevent flash
+  if (!isClient) {
+    return (
+      <div className={`flex flex-col h-full bg-white rounded-lg shadow-lg ${className}`}>
+        <div className="bg-blue-600 text-white p-4 rounded-t-lg">
+          <div className="flex items-center gap-3">
+            <div className="bg-blue-500 p-2 rounded-full">
+              <Brain className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold">Virtual Dr. John Sarno</h2>
+              <p className="text-blue-100 text-sm">TMS Specialist & Mind-Body Healing Expert</p>
+            </div>
+          </div>
+        </div>
+        <div className="flex-1 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-2 border-blue-600 border-t-transparent"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`flex flex-col h-full bg-white rounded-lg shadow-lg ${className}`}>
