@@ -22,7 +22,7 @@ export default function Home() {
     if (savedProgress) {
       setTreatmentProgress(savedProgress);
     }
-  }, [setUser, setTreatmentProgress]);
+  }, []); // Empty dependency array - this should only run once on mount
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
