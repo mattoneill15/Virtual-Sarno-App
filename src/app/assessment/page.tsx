@@ -1,11 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useApp, useAppActions } from '@/context/AppContext';
 import { UserProfile, PERSONALITY_TYPES, STRESS_FACTORS, PAIN_LOCATIONS, COMMON_SYMPTOMS } from '@/types';
 import { TMSAssessment } from '@/utils/tmsAssessment';
+import { SafetyMonitoringSystem } from '@/utils/safetyMonitoring';
 import { localStorage } from '@/utils/storage';
+import DisclaimerModal, { useDisclaimerManager } from '@/components/DisclaimerModal';
+import SafetyAlert from '@/components/SafetyAlert';
+import { RedFlag } from '@/types/safety';
 import { v4 as uuidv4 } from 'uuid';
 import { ArrowLeft, ArrowRight, Brain, AlertTriangle } from 'lucide-react';
 
