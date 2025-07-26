@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useApp, useAppActions } from '@/context/AppContext';
 import { localStorage } from '@/utils/storage';
+import Link from 'next/link';
 import { 
   Brain, 
   TrendingUp, 
@@ -13,7 +14,8 @@ import {
   Target,
   Plus,
   ArrowRight,
-  Home
+  Home,
+  Activity
 } from 'lucide-react';
 
 export default function Dashboard() {
@@ -332,31 +334,35 @@ export default function Dashboard() {
             {/* Quick Links */}
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Links</h3>
-              <div className="space-y-2">
-                <button 
-                  onClick={() => router.push('/assessment/results')}
-                  className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+              <div className="grid grid-cols-2 gap-4">
+                <Link
+                  href="/pain-tracker"
+                  className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  Assessment Results
-                </button>
-                <button 
-                  onClick={() => router.push('/journal')}
-                  className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                  <Activity className="h-5 w-5 text-indigo-600" />
+                  <span className="font-medium text-gray-900">Pain Tracker</span>
+                </Link>
+                <Link
+                  href="/journal"
+                  className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  Journal Entries
-                </button>
-                <button 
-                  onClick={() => router.push('/pain-tracker')}
-                  className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                  <BookOpen className="h-5 w-5 text-green-600" />
+                  <span className="font-medium text-gray-900">Journal</span>
+                </Link>
+                <Link
+                  href="/education"
+                  className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  Pain Tracker
-                </button>
-                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
-                  Educational Library
-                </button>
-                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
-                  Progress Charts
-                </button>
+                  <BookOpen className="h-5 w-5 text-purple-600" />
+                  <span className="font-medium text-gray-900">Education</span>
+                </Link>
+                <Link
+                  href="/progress"
+                  className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  <TrendingUp className="h-5 w-5 text-orange-600" />
+                  <span className="font-medium text-gray-900">Progress</span>
+                </Link>
               </div>
             </div>
           </div>
