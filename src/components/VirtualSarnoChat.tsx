@@ -49,15 +49,15 @@ export default function VirtualSarnoChat({
 
   const buildConversationContext = (): ConversationContext => {
     return {
-      userId: state.profile?.id || 'anonymous',
+      userId: state.user?.id || 'anonymous',
       sessionId,
       startTime: new Date(),
       currentPhase: state.currentPhase || 'assessment',
       userProfile: {
-        name: state.profile?.personalInfo?.name,
-        painHistory: state.profile?.painHistory,
-        psychologicalProfile: state.profile?.psychologicalProfile,
-        treatmentProgress: state.progress
+        name: state.user?.personalInfo?.name,
+        painHistory: state.user?.painHistory,
+        psychologicalProfile: state.user?.psychologicalProfile,
+        treatmentProgress: state.treatmentProgress
       },
       conversationHistory: messages,
       currentTopics: extractCurrentTopics(),
@@ -172,7 +172,7 @@ export default function VirtualSarnoChat({
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -334,7 +334,7 @@ export default function VirtualSarnoChat({
           <textarea
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
             placeholder="Ask Dr. Sarno about your pain, emotions, or TMS healing..."
             className="flex-1 resize-none border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             rows={2}

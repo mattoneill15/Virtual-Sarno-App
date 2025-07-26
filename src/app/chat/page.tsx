@@ -11,14 +11,14 @@ export default function ChatPage() {
   const { state } = useApp();
 
   useEffect(() => {
-    // Redirect to welcome if no profile exists
-    if (!state.profile) {
+    // Redirect to welcome if no user exists
+    if (!state.user) {
       router.push('/');
       return;
     }
-  }, [state.profile, router]);
+  }, [state.user, router]);
 
-  if (!state.profile) {
+  if (!state.user) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
@@ -27,7 +27,7 @@ export default function ChatPage() {
   }
 
   const getPersonalizedGreeting = () => {
-    const name = state.profile?.personalInfo?.name;
+    const name = state.user?.personalInfo?.name;
     const phase = state.currentPhase;
     
     let greeting = `Hello${name ? ` ${name}` : ''}! I'm Dr. John Sarno. `;
