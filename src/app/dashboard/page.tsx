@@ -336,6 +336,13 @@ export default function Dashboard() {
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Links</h3>
               <div className="grid grid-cols-2 gap-4">
                 <Link
+                  href="/chat"
+                  className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors bg-blue-50 border-blue-200"
+                >
+                  <Brain className="h-5 w-5 text-blue-600" />
+                  <span className="font-medium text-gray-900">Ask Dr. Sarno</span>
+                </Link>
+                <Link
                   href="/pain-tracker"
                   className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                 >
