@@ -193,8 +193,11 @@ export default function Dashboard() {
                     <span>10 (Severe)</span>
                   </div>
                 </div>
-                <button className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors">
-                  Log Today's Session
+                <button 
+                  onClick={() => router.push('/pain-tracker')}
+                  className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors"
+                >
+                  Go to Full Pain Tracker
                 </button>
               </div>
             </div>
@@ -270,12 +273,26 @@ export default function Dashboard() {
                   </button>
                 )}
 
-                <button className="w-full flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors">
+                <button 
+                  onClick={() => router.push('/journal')}
+                  className="w-full flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors"
+                >
                   <div className="flex items-center space-x-3">
                     <Plus className="h-5 w-5 text-green-600" />
                     <span className="font-medium text-green-900">New Journal Entry</span>
                   </div>
                   <ArrowRight className="h-4 w-4 text-green-600" />
+                </button>
+                
+                <button 
+                  onClick={() => router.push('/pain-tracker')}
+                  className="w-full flex items-center justify-between p-3 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 transition-colors"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Heart className="h-5 w-5 text-red-600" />
+                    <span className="font-medium text-red-900">Track Pain & Symptoms</span>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-red-600" />
                 </button>
               </div>
             </div>
@@ -322,8 +339,17 @@ export default function Dashboard() {
                 >
                   Assessment Results
                 </button>
-                <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+                <button 
+                  onClick={() => router.push('/journal')}
+                  className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                >
                   Journal Entries
+                </button>
+                <button 
+                  onClick={() => router.push('/pain-tracker')}
+                  className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                >
+                  Pain Tracker
                 </button>
                 <button className="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
                   Educational Library
